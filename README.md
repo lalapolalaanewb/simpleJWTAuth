@@ -58,9 +58,9 @@ C:\simpleJWTAuth\final\>npm start
 ## Step By Step Guides
 
 - [ ] simple setup
- - [ ] create new starter folder
- - [ ] create model or data scheme
- - [ ] create new user
+    - [ ] create new starter folder
+    - [ ] create model or data scheme
+    - [ ] create new user
   - [ ] check if req being send from form, throw error if NO
   - [ ] check if email already exit, throw error if YES
   - [ ] hash password with bcrypt
