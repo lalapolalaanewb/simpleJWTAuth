@@ -65,16 +65,16 @@ C:\simpleJWTAuth\final\>npm start
     - [ ] check if email already exit, throw error if YES
     - [ ] hash password with bcrypt
     - [ ] save new user into db
- - [ ] login as new user
-  - [ ] check user email existance, throw error if ALREADY EXIST
-  - [ ] check user password match, throw error if password NOT MATCH
-  - [ ] generate access token (with expiration time)
-  - [ ] generate refresh token (without expiration time)
-  - [ ] save access token and refresh token in db
-   - [ ] if successful, then go to homepage
-    - [ ] create home GET route with token verifiication
-     - [ ] create token verification function
-   - [ ] if unsuccessful, then throw error
+  - [ ] login as new user
+    - [ ] check user email existance, throw error if ALREADY EXIST
+    - [ ] check user password match, throw error if password NOT MATCH
+    - [ ] generate access token (with expiration time)
+    - [ ] generate refresh token (without expiration time)
+    - [ ] save access token and refresh token in db
+      - [ ] if successful, then go to homepage
+        - [ ] create home GET route with token verifiication
+          - [ ] create token verification function
+      - [ ] if unsuccessful, then throw error
 - [ ] complete setup
  - [ ] create login page
   - [ ] create login GET route
