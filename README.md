@@ -58,6 +58,7 @@ C:\simpleJWTAuth\final\>npm start
 ## Step By Step Guides
 
 - [ ] simple setup
+ - [ ] create new starter folder
  - [ ] create model or data scheme
  - [ ] create new user
   - [ ] check if req being send from form, throw error if NO
@@ -108,8 +109,8 @@ C:\simpleJWTAuth\final\>npm start
                - [ ] verify refresh token
                 - [ ] if successful, then
                  - [ ] generate new aacess token
-                 - update and save new access token in db
-                 - return back to fetch call made from invalid token page with new access token
+                 - [ ] update and save new access token in db
+                 - [ ] return back to fetch call made from invalid token page with new access token
                 - [ ] if unsuccessful, then return unsuccessful message
              - [ ] if unsuccessful, then empty localStorage and redirect back to login page
         - [ ] logout (to logout)
