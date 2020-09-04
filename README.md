@@ -61,10 +61,10 @@ C:\simpleJWTAuth\final\>npm start
     - [ ] create new starter folder
     - [ ] create model or data scheme
     - [ ] create new user
-  - [ ] check if req being send from form, throw error if NO
-  - [ ] check if email already exit, throw error if YES
-  - [ ] hash password with bcrypt
-  - [ ] save new user into db
+      - [ ] check if req being send from form, throw error if NO
+      - [ ] check if email already exit, throw error if YES
+      - [ ] hash password with bcrypt
+      - [ ] save new user into db
  - [ ] login as new user
   - [ ] check user email existance, throw error if ALREADY EXIST
   - [ ] check user password match, throw error if password NOT MATCH
