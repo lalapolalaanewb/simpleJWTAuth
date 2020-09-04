@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Document</title>
+    <style>
+        .all {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+        }
+        a {
+            position: relative;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #continue {
+            background-color: #0095ff;
+        }
+    
+        #logout {
+            margin-left: 30px;
+            background-color: #FF5959;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <h1>Your session has expired.</h1>
+        <p>Choose your options:-</p>
+        <div>
+            <a id="continue">Continue</a>
+            <a id="logout">Logout</a>
+        </div>
+    </div>
+    <script>
+        if(localStorage.length > 0) {
+            // 1. Event Listener for Continue
+            document.querySelector('#continue').addEventListener('click', event => {
+                // change status = 0 for Invalid Token
+                localStorage.setItem('userSession', JSON.stringify({
+                    accessToken: JSON.parse(localStorage.getItem('userSession')).accessToken,
+                    status: 0
+                }))
+                
+                if(JSON.parse(localStorage.getItem('userSession')).status === 1) {
+                    // back to Home Page
+                    window.location.replace(`/?accesstoken=${JSON.parse(localStorage.getItem('userSession')).accessToken}`)
+                } else {
+                    // check if accessToken blacklist or not
+                    fetch(`/auth/blacklist`, {
+                        method: 'POST',
+                        body: JSON.stringify({ accessToken: JSON.parse(localStorage.getItem('userSession')).accessToken }),
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.message === 'Not blacklisted!') {
+                            // get new AccessToken
+                            fetch(`/auth/refreshtoken`, {
+                                method: 'POST',
+                                body: JSON.stringify({ accessToken: JSON.parse(localStorage.getItem('userSession')).accessToken }),
+                                headers: {
+                                    'content-type': 'application/json'
+                                }
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                if(data.message === 'Successful!') {
+                                    // 1. update new accessToken in userSession LocalStorage
+                                    // 2. update status in userSession LocalStorage back to 1
+                                    localStorage.setItem('userSession', JSON.stringify({
+                                        accessToken: data.accessToken,
+                                        status: 1
+                                    }))
+                                    // 3. redirect user back to Home page
+                                    window.location.replace(`/?accesstoken=${JSON.parse(localStorage.getItem('userSession')).accessToken}`)
+                                } else {
+                                    // 1. kill all tokens in LocalStorage
+                                    window.localStorage.clear()
+                                    // 2. set login path
+                                    loginURL = '/auth'
+                                    // 3. back to login page
+                                    window.location.replace(loginURL)
+                                }
+                            }).catch(err => console.log(err))
+                        } else {
+                            // 1. kill all tokens in LocalStorage
+                            window.localStorage.clear()
+                            // 2. set login path
+                            loginURL = '/auth'
+                            // 3. back to login page
+                            window.location.replace(loginURL)
+                        }
+                    }).catch(err => console.log(err))
+                }
+            })
+            // 2. Event Listener for Logout
+            document.querySelector('#logout').addEventListener('click', event => {
+                // check if accessToken blacklist or not
+                fetch(`/auth/blacklist`, {
+                    method: 'POST',
+                    body: JSON.stringify({ accessToken: JSON.parse(localStorage.getItem('userSession')).accessToken }),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.message === 'Not blacklisted!') {
+                        let data = {
+                            accessToken: JSON.parse(localStorage.getItem('userSession')).accessToken
+                        }
+                        
+                        // update Status in blacklist
+                        fetch('/auth/logout', {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: {
+                                'content-type': 'application/json'
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            // 1. kill all tokens in LocalStorage
+                            window.localStorage.clear()
+                            // 2. set login path
+                            loginURL = '/auth'
+                            // 3. back to login page
+                            window.location.replace(loginURL)
+                        })
+                        .catch(err => console.log('Fuck!'))
+                    } else {
+                        // 1. kill all tokens in LocalStorage
+                        window.localStorage.clear()
+                        // 2. set login path
+                        loginURL = '/auth'
+                        // 3. back to login page
+                        window.location.replace(loginURL)
+                    }
+                }).catch(err => console.log(err))
+            })
+        } else {
+            // back to Login Page
+            window.location.replace(`/`)
+        }
+    </script>
+</body>
+</html>

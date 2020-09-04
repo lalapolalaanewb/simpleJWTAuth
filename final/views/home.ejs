@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .all {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #logout {
+            position: relative;
+            text-transform: uppercase;
+            padding: 8px 13px;
+            color: #ECFFFB;
+            background-color: #FF5959;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <h1>Welcome to the homepage!</h1>
+        <div id="logout">Logout</div>
+    </div>
+
+    <!-- Custom Script -->
+    <script>
+        // crete & store token & status in Local Storage
+        localStorage.setItem('userSession', JSON.stringify({
+            accessToken: `<%= accessToken %>`,
+            status: 1
+        }))
+
+        // if user click logout button
+        document.querySelector('#logout').addEventListener('click', event => {
+            let data = {
+                accessToken: JSON.parse(localStorage.getItem('userSession')).accessToken
+            }
+            
+            // update Status in blacklist
+            fetch('/auth/logout', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                // 1. kill all tokens in LocalStorage
+                window.localStorage.clear()
+                // 2. set login path
+                loginURL = '/auth'
+                // 3. back to login page
+                window.location.replace(loginURL)
+            })
+            .catch(err => console.log('Fuck!'))
+        })
+    </script>
+</body>
+</html>

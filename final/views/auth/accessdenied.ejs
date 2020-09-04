@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // if THERE'S NO data in Local Storage
+        if(localStorage.length === 0) {
+            // back to Login Page
+            window.location.replace(`/auth`)
+        } else { // if THERE'S IS data in Local Storage
+            // if status=1, then
+            if(JSON.parse(localStorage.getItem('userSession')).status === 1) {
+                // back to Home Page
+                window.location.replace(`/?accesstoken=${JSON.parse(localStorage.getItem('userSession')).accessToken}`)
+            } else { // if status=0, then
+                // go to Invalid Token Page
+                window.location.replace(`/auth/invalidToken`)
+            }
+        }
+    </script>
+</body>
+</html>

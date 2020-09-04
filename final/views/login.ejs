@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .all {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .heading2 {
+            padding: 0;
+            margin: 0;
+            color: #0077cc;
+        }
+        span {
+            color: #0095ff;
+        }
+        p {
+            position: relative;
+            margin: 0;
+        }
+        form {
+            position: relative;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .login {
+            position: relative;
+            color: white;
+            font-weight: 600;
+            margin-top: 15px;
+            padding: 5px 12px;
+            border: transparent;
+            border-radius: 5px;
+            background-color: #0077cc;
+            transition: all 0.5s ease-in-out;
+        }
+        .login:hover {
+            cursor: pointer;
+            background-color: #0095ff;
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <h2 class="heading2">LOGIN <span>PAGE</span></h2>
+        <p>Insert your credentials below:-</p>
+        <form action="/auth" method="post">
+            <div>
+                <input type="email" name="email" placeholder="username" required>
+                <input type="password" name="password" placeholder="password" required>
+            </div>
+            <button class="login" type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
