@@ -76,54 +76,54 @@ C:\simpleJWTAuth\final\>npm start
           - [ ] create token verification function
       - [ ] if unsuccessful, then throw error
 - [ ] complete setup
- - [ ] create login page
-  - [ ] create login GET route
-  - [ ] alter home GET route to render home page
-  - [ ] create home page
-   - [ ] store access token in localStorage
-   - [ ] setup logout button
-    - [ ] create POST route for logout button
-     - [ ] verify access token
-      - [ ] if successful (when access token still VALID), then use userID to confirm logout
-      - [ ] if unsuccessful (when access token is NOT VALID), then use access token to confirm logout
+  - [ ] create login page
+    - [ ] create login GET route
+    - [ ] alter home GET route to render home page
+    - [ ] create home page
+      - [ ] store access token in localStorage
+      - [ ] setup logout button
+        - [ ] create POST route for logout button
+          - [ ] verify access token
+            - [ ] if successful (when access token still VALID), then use userID to confirm logout
+            - [ ] if unsuccessful (when access token is NOT VALID), then use access token to confirm logout
   - [ ] handle token access denied
-   - [ ] if NO data in localStorage, then back to login page
-   - [ ] if HAVE data in localStorage, then
-    - [ ] check if status=1, then back to home page
-    - [ ] check if status=0, then redirect to invalid token route
-     - [ ] create invalid token route
-      - [ ] create and render invalid token page
-       - [ ] create button to allow user to:-
-        - [ ] continue (stay logged in)
-         - [ ] add event listener to:-
-          - [ ] invalidated current user's token (status=0)
-          - [ ] check status, if equals to 1
-           - [ ] redirect back user to home page
-          - [ ] check status, if equals to 0
-           - [ ] give new access token
-            - [ ] refresh token
-             - [ ] if successful, then update new access token and status in localStorage
-              - [ ] create refresh token POST route
-               - [ ] check access token availability
-               - [ ] update status of access token in db
-               - [ ] verify refresh token
-                - [ ] if successful, then
-                 - [ ] generate new aacess token
-                 - [ ] update and save new access token in db
-                 - [ ] return back to fetch call made from invalid token page with new access token
-                - [ ] if unsuccessful, then return unsuccessful message
-             - [ ] if unsuccessful, then empty localStorage and redirect back to login page
-        - [ ] logout (to logout)
-         - [ ] add event listener to:-
-          - [ ] fetch call to logout POST route
+    - [ ] if NO data in localStorage, then back to login page
+    - [ ] if HAVE data in localStorage, then
+      - [ ] check if status=1, then back to home page
+      - [ ] check if status=0, then redirect to invalid token route
+        - [ ] create invalid token route
+          - [ ] create and render invalid token page
+            - [ ] create button to allow user to:-
+              - [ ] continue (stay logged in)
+                - [ ] add event listener to:-
+                  - [ ] invalidated current user's token (status=0)
+                  - [ ] check status, if equals to 1
+                    - [ ] redirect back user to home page
+                  - [ ] check status, if equals to 0
+                    - [ ] give new access token
+                      - [ ] refresh token
+                        - [ ] if successful, then update new access token and status in localStorage
+                          - [ ] create refresh token POST route
+                            - [ ] check access token availability
+                            - [ ] update status of access token in db
+                            - [ ] verify refresh token
+                              - [ ] if successful, then
+                                - [ ] generate new aacess token
+                                - [ ] update and save new access token in db
+                                - [ ] return back to fetch call made from invalid token page with new access token
+                              - [ ] if unsuccessful, then return unsuccessful message
+                        - [ ] if unsuccessful, then empty localStorage and redirect back to login page
+              - [ ] logout (to logout)
+                - [ ] add event listener to:-
+                  - [ ] fetch call to logout POST route
 - [ ] secure setup
- - [ ] add fetch call to check valid token in invalid token page
-  - when user hit 'continue' button
-   - [ ] if blacklisted, then empty localStorage and redirect user to login page
-   - [ ] if not blacklisted, then do refresh tokan fetch call
-  - when user hit 'logout' button
-   - [ ] if blacklisted, then empty localStorage and redirect user to login page
-   - [ ] if not blacklisted, then do logout fetch call
+  - [ ] add fetch call to check valid token in invalid token page
+    - when user hit 'continue' button
+      - [ ] if blacklisted, then empty localStorage and redirect user to login page
+      - [ ] if not blacklisted, then do refresh tokan fetch call
+    - when user hit 'logout' button
+      - [ ] if blacklisted, then empty localStorage and redirect user to login page
+      - [ ] if not blacklisted, then do logout fetch call
 
 ## Deployment
 
