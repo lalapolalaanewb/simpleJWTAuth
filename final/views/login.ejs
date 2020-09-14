@@ -48,12 +48,30 @@
             background-color: #0095ff;
             transition: all 0.5s ease-in-out;
         }
+        table, th, td {
+            position: relative;
+            margin-top: 30px;
+            border: 1px solid  #0077cc;
+        }
+        th {
+            color: #0095ff;
+        }
     </style>
 </head>
 <body>
     <div class="all">
         <h2 class="heading2">LOGIN <span>PAGE</span></h2>
         <p>Insert your credentials below:-</p>
+        <table>
+            <tr>
+                <th>Registered User's Email</th>
+                <th>Registered User's Password</th>
+            </tr>
+            <tr>
+                <td><%= email %></td>
+                <td><%= password %></td>
+            </tr>
+        </table>
         <form action="/auth" method="post">
             <div>
                 <input type="email" name="email" placeholder="username" required>

@@ -48,7 +48,15 @@ router.post('/register', async(req, res) => {
 
 // LOGIN Get Router
 router.get('/', async(req, res) => {
-    res.render('login')
+    // get registered user email
+    let registerUser = await All.findOne()
+    console.log(registerUser.credentials)
+
+    let password = 'anypassword123'
+    const validPassword = await bcrypt.compare(password, registerUser.credentials.password)
+    if(!validPassword) return res.json({ message: `Invalid password! Make sure you provide the correct password.` })
+
+    res.render('login', { email: registerUser.credentials.email, password: password })
 })
 
 // LOGIN Post Router
